@@ -1,0 +1,131 @@
+services:
+  ollama:
+    image: ollama/ollama:latest
+    container_name: ollama
+    runtime: nvidia
+    environment:
+      - NVIDIA_VISIBLE_DEVICES=all
+    networks:
+      - evolution
+    ports:
+      - "11434:11434"
+
+  whisper:
+    image: lscr.io/linuxserver/faster-whisper:latest
+    container_name: whisper
+    runtime: nvidia
+    environment:
+      - NVIDIA_VISIBLE_DEVICES=all
+      - MODEL_SIZE=small
+      - WHISPER_CONCURRENCY=1
+    volumes:
+      - whisper_data:/config
+      - ./whisper/init.sh:/init.sh
+    entrypoint: ["/bin/bash", "/init.sh"]
+    ports:
+      - "9000:9000"
+    networks:
+      - evolution
+    restart: unless-stopped
+
+  n8n:
+    image: n8nio/n8n:latest
+    container_name: n8n
+    ports:
+      - "5678:5678"
+    environment:
+      - GENERIC_TIMEZONE=America/Mexico_City
+    volumes:
+      - n8n_data:/root/.n8n
+    depends_on:
+      - redis
+      - postgresql
+    networks:
+      - evolution
+    restart: always
+
+  redis:
+    image: redis:latest
+    container_name: redis
+    command: >
+      redis-server --port 6379 --appendonly yes
+    volumes:
+      - redis_data:/data
+    networks:
+      - evolution
+    restart: always
+
+  postgresql:
+    image: postgres:latest
+    container_name: postgresql
+    environment:
+      - POSTGRES_USER=NeKuBe
+      - POSTGRES_PASSWORD=Linkmaster11
+      - POSTGRES_DB=ggtech
+      - POSTGRES_HOST_AUTH_METHOD=trust
+    volumes:
+      - postgresql_data:/var/lib/postgresql/data
+    networks:
+      - evolution
+    restart: always
+    command: ["postgres", "-c", "max_connections=1000", "-c", "listen_addresses=*"]
+    ports:
+      - 5432:5432
+    expose:
+      - 5432
+  rasa:
+    image: rasa/rasa:latest
+    container_name: rasa
+    ports:
+      - "5005:5005"
+    volumes:
+      - ./rasa_project:/app
+    working_dir: /app
+    command: run --enable-api --cors "*" --debug    
+    networks:
+      - evolution
+    restart: always
+  ai_api:
+    build:
+      context: ./ai-api
+    container_name: ai-api
+    ports:
+      - "8000:8000"
+    environment:
+      - NVIDIA_VISIBLE_DEVICES=all
+    deploy:
+      resources:
+        reservations:
+          devices:
+            - capabilities: [gpu]
+    volumes:
+      - ./ai-api:/app
+    runtime: nvidia
+    restart: unless-stopped
+  evolution-api:
+    container_name: evolution_api
+    image: atendai/evolution-api:homolog
+    restart: always
+    ports:
+      - 8080:8080
+    volumes:
+      - evolution_instances:/evolution/instances
+    networks:
+      - evolution
+    env_file:
+      - .env
+    expose:
+      - 8080
+networks:
+  evolution:
+    external: true
+
+
+volumes:
+  evolution_instances:
+  whisper_data:
+  n8n_data:
+  redis_data:
+  postgresql_data:
+  rasa_data:
+
