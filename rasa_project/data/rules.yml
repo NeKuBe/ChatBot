@@ -1,6 +1,0 @@
-version: "3.1"
-rules:
-  - rule: Responder con Ollama
-    steps:
-      - intent: ask_anything
-      - action: action_ollama_chat

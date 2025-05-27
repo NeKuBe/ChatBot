@@ -11,21 +11,20 @@ services:
       - "11434:11434"
 
   whisper:
-    image: lscr.io/linuxserver/faster-whisper:latest
+    build: ./whisper
     container_name: whisper
     runtime: nvidia
     environment:
       - NVIDIA_VISIBLE_DEVICES=all
-      - MODEL_SIZE=small
-      - WHISPER_CONCURRENCY=1
-    volumes:
-      - whisper_data:/config
-      - ./whisper/init.sh:/init.sh
-    entrypoint: ["/bin/bash", "/init.sh"]
     ports:
-      - "9000:9000"
+      - "8282:8282"
     networks:
       - evolution
+    deploy:
+      resources:
+        reservations:
+          devices:
+            - capabilities: [gpu]
     restart: unless-stopped
 
   n8n:
@@ -73,35 +72,7 @@ services:
       - 5432:5432
     expose:
       - 5432
-  rasa:
-    image: rasa/rasa:latest
-    container_name: rasa
-    ports:
-      - "5005:5005"
-    volumes:
-      - ./rasa_project:/app
-    working_dir: /app
-    command: run --enable-api --cors "*" --debug    
-    networks:
-      - evolution
-    restart: always
-  ai_api:
-    build:
-      context: ./ai-api
-    container_name: ai-api
-    ports:
-      - "8000:8000"
-    environment:
-      - NVIDIA_VISIBLE_DEVICES=all
-    deploy:
-      resources:
-        reservations:
-          devices:
-            - capabilities: [gpu]
-    volumes:
-      - ./ai-api:/app
-    runtime: nvidia
-    restart: unless-stopped
+
   evolution-api:
     container_name: evolution_api
     image: atendai/evolution-api:homolog
@@ -116,6 +87,97 @@ services:
       - .env
     expose:
       - 8080
+  yolov5:
+    build: ./yolov5
+    runtime: nvidia
+    deploy:
+      resources:
+        reservations:
+          devices:
+            - capabilities: [gpu]
+    ports:
+      - "8002:8002"
+    networks:
+      - evolution
+    volumes:
+      - ./yolov5:/app
+
+  clip:
+    build: ./CLIP
+    runtime: nvidia
+    deploy:
+      resources:
+        reservations:
+          devices:
+            - capabilities: [gpu]
+    ports:
+      - "8001:8001"
+    networks:
+      - evolution      
+    volumes:
+      - ./CLIP:/app
+
+  fastapi:
+    build: ./fastAPI
+    ports:
+      - "9696:9696"
+    networks:
+      - evolution
+    volumes:
+      - ./fastAPI:/app
+
+  langchain:
+    build: ./langchain
+    volumes:
+      - ./langchain:/app
+    networks:
+      - evolution
+  chroma:
+    image: chromadb/chroma
+    container_name: chroma
+    ports:
+      - "1010:8000"  # Puerto para acceder desde Langchain
+    volumes:
+      - ./chroma_data:/chroma/chroma  # Persistencia local
+    environment:
+      IS_PERSISTENT: "TRUE"
+      ANONYMIZED_TELEMETRY: "FALSE"
+    networks:
+      - evolution
+    restart: unless-stopped
+  sheets-service:
+    build:
+      context: ./sheets
+    volumes:
+      - ./sheets/credenciales_google.json:/app/credenciales_google.json
+    ports:
+      - "8004:8004"
+    networks:
+      - evolution
+  easyocr:
+    build:
+      context: ./easyocr
+    ports:
+      - "8005:8005"
+    deploy:
+      resources:
+        reservations:
+          devices:
+            - driver: nvidia
+              capabilities: [gpu]
+    runtime: nvidia
+  crawlee-api:
+    build:
+      context: ./crawlee
+    container_name: crawlee
+    ports:
+      - "3000:3000"
+    restart: always
+    environment:
+      - NODE_ENV=production
+    volumes:
+      - ./crawlee:/app
+
 networks:
   evolution:
     external: true

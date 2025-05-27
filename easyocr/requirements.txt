@@ -1,0 +1,5 @@
+torch
+easyocr
+fastapi
+uvicorn
+pydantic

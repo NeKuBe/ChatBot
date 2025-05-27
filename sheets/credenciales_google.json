@@ -1,0 +1,13 @@
+{
+  "type": "service_account",
+  "project_id": "gg-tech-461007",
+  "private_key_id": "31f0aef47f50e8be3bd47ae41de6ecf676bcd33a",
+  "private_key": "-----BEGIN PRIVATE KEY-----\nMIIEvwIBADANBgkqhkiG9w0BAQEFAASCBKkwggSlAgEAAoIBAQCdnLf2iCt0Pj7E\nsHA29JguPepwo5Xmx6GQT9cWvyrKxsoQVHhv/DTwOQEZIp52cAFcECbpK3g/Lx/W\nvHJ3Ym4hmjvezV99GGus9ID9KXa60538pf+6SaIxLfn5L/Eq4vrI24+nCPG4g/MX\nua34lubepH6obBvhBwmCt8OWELa3cJ8iUon9jiVb8JfceLV6xGEVRx5f3bL0OFXJ\nKZeKCQm5oOsshw1yDqg/C51/5dYy4aJvuIuIxFYS9kgjcotlY2ZDjJv9Hdz+ra6n\niI9ke/6jo3ruO1OKsCMPKyLovnnP65eCkI4ZuAcoSAM75t82RduaslKuu7z8Raeb\nbtAmIWubAgMBAAECggEACdbH3dIn/Z80dZHax3YjGTaQmox+Ze7jZT9esChUkwkF\ngdnMFO2RHnKTNiRPm8Qn3ufmjfAX7Gspg9MKxZd1mY+9Gg5cXiehR9A8THwt/GwL\nykL7QP//adjdaH1iLZOyz8lztnExVHFEQnW7EwV/ObnaFZ3TawubP+JEiZXXL4H1\nUAsjpDssCWMRN2sm9XZKK1Vv8NbitvzsjNtMrMFpuQhcPrRp8EyMCl/5jmSkbapu\nkwf9iLfZ322PSay2/QWzsgdonhAkhJBjBB+/d78kVtpETGjwfrVsBsXrcmLT+zED\nVeGKQtFflH2YRcwyzznw6VROoyxMGK6NJAIZenp9NQKBgQDaSqKQTkgnlcC16SRb\nx0FYZk1ADvtJQmz1bgGju0/AmLavU5kyGsTJsiUSAqUN5uC0tY26uYGw6GboIGm1\nWMZdXcjTWYa3VN0tF3jwrpdIPS8NbLHiSx5K6gB5UqIhsfuwe17oOwsmF8pXUkBw\n7gs1LM6P8ALYqJa6r/VCTJW9nQKBgQC41rMdAVnEzAf8PipkUjmrFg9Nu3K3Fdy3\npl5pFprto3sDJBda6mvguXkY3L0eC6UOIeEcKrAaHBbAHvvniMTUGh9EmX1EjSwL\n7wVqKMWo+nzIR3bCdbuI+iEwifxIjkHstUWO8gXoQiyMhzko5HiBk8O0QqnLdIEk\nmKyy2M6klwKBgQCz6Rt+j+ZMKdKAmzyKH/ktYHN+vlpBEOw4g4f6aCDc/YBjlCUI\n9KMIETkYVPGwOX8tsQy0vruzEHfwDPbSre4feXJRLtInO1xnE5dr1pl8wmCLUfBy\nL7MxzxbA52gVGVn1JFkeUbtok+cCfRn7eVXnZ5x/aTMPWjOQfgFHuVMYyQKBgQCc\noGIanABjgLjriAoIBJ0VWpYROlvUxNPJU1MBHcSexj8AxF5+DdLoFIKHDNW8VgXB\nWfgVFB8xoMeueRLgecbALHp+eMnrguzmF96wvGfx7oA6fkQmN/l38uyY4vRCzzkR\nyfFtVaynyRtS4WsQObnbo0jcwPh8jPa5+h2tV4aTdQKBgQDA4Urx323DolbF30v2\n+mFyRo4JEX53ZkQgXZXCd/631r7nM3PsPmEatSixFSexLbbCIom1gJy67G0dVNjE\nQkk57QIxIRSbDOQ4hEDhyatNuMtcB9Jw4OCvXjlUggbr3S1HQRgFetw9DE6pEcHF\n9hAlIE+VKTnkm7JkTTRMG8pK5g==\n-----END PRIVATE KEY-----\n",
+  "client_email": "reparaciones@gg-tech-461007.iam.gserviceaccount.com",
+  "client_id": "106686597210565732442",
+  "auth_uri": "https://accounts.google.com/o/oauth2/auth",
+  "token_uri": "https://oauth2.googleapis.com/token",
+  "auth_provider_x509_cert_url": "https://www.googleapis.com/oauth2/v1/certs",
+  "client_x509_cert_url": "https://www.googleapis.com/robot/v1/metadata/x509/reparaciones%40gg-tech-461007.iam.gserviceaccount.com",
+  "universe_domain": "googleapis.com"
+}

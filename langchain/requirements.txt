@@ -1,0 +1,12 @@
+langchain
+openai
+python-dotenv
+requests
+fastapi
+uvicorn
+httpx
+langchain-community
+chromadb
+sentence-transformers
+pypdf
+psycopg2-binary

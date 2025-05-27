@@ -1,0 +1,8 @@
+{
+  "name": "crawlee-bot",
+  "version": "1.0.0",
+  "type": "module",
+  "dependencies": {
+    "crawlee": "^3.4.0"
+  }
+}
