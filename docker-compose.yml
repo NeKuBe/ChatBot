@@ -145,7 +145,7 @@ services:
     networks:
       - evolution
     restart: unless-stopped
-  sheets-service:
+  sheets:
     build:
       context: ./sheets
     volumes:
