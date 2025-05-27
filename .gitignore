@@ -8,3 +8,5 @@ node_modules/
 data/
 *.sqlite3
 docker-compose.override.yml
+sheets/credenciales_google.json
+sheets/credenciales_google.json
