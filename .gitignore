@@ -10,3 +10,4 @@ data/
 docker-compose.override.yml
 sheets/credenciales_google.json
 sheets/credenciales_google.json
+sheets/credenciales_google.json
